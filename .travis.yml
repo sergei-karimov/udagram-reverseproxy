@@ -18,7 +18,10 @@ script:
   - docker build -t udagram-reverseproxy .
   - docker tag udagram-reverseproxy kariman/udagram-reverseproxy:v1
 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push kariman/udagram-reverseproxy:v1
+
 # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push kariman/udagram-reverseproxy:v1
+  - docker push kariman/udagram-reverseproxy:v2
